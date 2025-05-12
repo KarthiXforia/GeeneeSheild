@@ -1,3 +1,4 @@
+// Maintain compatibility with the existing components
 export const averageTicketsCreated = [
   { date: "2023-11-15", created: 4324, resolved: 2342 },
   { date: "2023-11-16", created: 3534, resolved: 2013 },
@@ -64,3 +65,157 @@ export const averageTicketsCreated = [
   { date: "2024-01-16", created: 4012, resolved: 2278 },
   { date: "2024-01-17", created: 3876, resolved: 2209 },
 ];
+
+// New data for Samsung Knox MDM dashboard
+export const activationTrendData = {
+  daily: [
+    { date: "2025-04-10", activated: 324, total: 345 },
+    { date: "2025-04-11", activated: 412, total: 432 },
+    { date: "2025-04-12", activated: 389, total: 405 },
+    { date: "2025-04-13", activated: 367, total: 384 },
+    { date: "2025-04-14", activated: 432, total: 456 },
+    { date: "2025-04-15", activated: 487, total: 512 },
+    { date: "2025-04-16", activated: 521, total: 543 },
+    { date: "2025-04-17", activated: 498, total: 524 },
+    { date: "2025-04-18", activated: 432, total: 453 },
+    { date: "2025-04-19", activated: 387, total: 402 },
+    { date: "2025-04-20", activated: 354, total: 373 },
+    { date: "2025-04-21", activated: 398, total: 418 },
+    { date: "2025-04-22", activated: 456, total: 479 },
+    { date: "2025-04-23", activated: 489, total: 512 },
+    { date: "2025-04-24", activated: 532, total: 556 },
+    { date: "2025-04-25", activated: 567, total: 592 },
+    { date: "2025-04-26", activated: 487, total: 511 },
+    { date: "2025-04-27", activated: 421, total: 442 },
+    { date: "2025-04-28", activated: 456, total: 478 },
+    { date: "2025-04-29", activated: 504, total: 532 },
+    { date: "2025-04-30", activated: 543, total: 565 },
+    { date: "2025-05-01", activated: 578, total: 601 },
+    { date: "2025-05-02", activated: 612, total: 634 },
+    { date: "2025-05-03", activated: 543, total: 567 },
+    { date: "2025-05-04", activated: 487, total: 512 },
+    { date: "2025-05-05", activated: 532, total: 556 },
+    { date: "2025-05-06", activated: 567, total: 589 },
+    { date: "2025-05-07", activated: 598, total: 623 },
+    { date: "2025-05-08", activated: 632, total: 656 },
+    { date: "2025-05-09", activated: 654, total: 678 },
+  ],
+  weekly: [
+    { date: "Week 1 Apr", activated: 2341, total: 2464 },
+    { date: "Week 2 Apr", activated: 2789, total: 2934 },
+    { date: "Week 3 Apr", activated: 3126, total: 3278 },
+    { date: "Week 4 Apr", activated: 3542, total: 3687 },
+    { date: "Week 1 May", activated: 3897, total: 4056 },
+  ],
+  monthly: [
+    { date: "Jan 2025", activated: 11234, total: 11987 },
+    { date: "Feb 2025", activated: 12456, total: 13210 },
+    { date: "Mar 2025", activated: 13698, total: 14321 },
+    { date: "Apr 2025", activated: 15234, total: 15980 },
+    { date: "May 2025", activated: 4123, total: 4290 },
+  ],
+};
+
+// Filtered data by region
+export const filteredActivationTrend = {
+  // State-specific data
+  states: {
+    Karnataka: {
+      daily: [
+        { date: "2025-05-05", activated: 156, total: 164 },
+        { date: "2025-05-06", activated: 168, total: 176 },
+        { date: "2025-05-07", activated: 178, total: 186 },
+        { date: "2025-05-08", activated: 187, total: 195 },
+        { date: "2025-05-09", activated: 195, total: 203 },
+      ],
+      weekly: [
+        { date: "Week 1 Apr", activated: 687, total: 724 },
+        { date: "Week 2 Apr", activated: 823, total: 864 },
+        { date: "Week 3 Apr", activated: 926, total: 968 },
+        { date: "Week 4 Apr", activated: 1042, total: 1086 },
+        { date: "Week 1 May", activated: 1156, total: 1205 },
+      ],
+      monthly: [
+        { date: "Jan 2025", activated: 3256, total: 3478 },
+        { date: "Feb 2025", activated: 3645, total: 3834 },
+        { date: "Mar 2025", activated: 3987, total: 4156 },
+        { date: "Apr 2025", activated: 4356, total: 4567 },
+        { date: "May 2025", activated: 1225, total: 1278 },
+      ],
+    },
+    Maharashtra: {
+      daily: [
+        { date: "2025-05-05", activated: 198, total: 208 },
+        { date: "2025-05-06", activated: 212, total: 221 },
+        { date: "2025-05-07", activated: 223, total: 232 },
+        { date: "2025-05-08", activated: 235, total: 244 },
+        { date: "2025-05-09", activated: 243, total: 253 },
+      ],
+      weekly: [
+        { date: "Week 1 Apr", activated: 876, total: 921 },
+        { date: "Week 2 Apr", activated: 1043, total: 1089 },
+        { date: "Week 3 Apr", activated: 1168, total: 1221 },
+        { date: "Week 4 Apr", activated: 1323, total: 1378 },
+        { date: "Week 1 May", activated: 1452, total: 1512 },
+      ],
+      monthly: [
+        { date: "Jan 2025", activated: 4187, total: 4456 },
+        { date: "Feb 2025", activated: 4657, total: 4932 },
+        { date: "Mar 2025", activated: 5112, total: 5367 },
+        { date: "Apr 2025", activated: 5678, total: 5943 },
+        { date: "May 2025", activated: 1537, total: 1601 },
+      ],
+    },
+    // Add more states as needed
+  },
+  // District-specific data - just showing examples
+  districts: {
+    "Bangalore Urban": {
+      daily: [
+        { date: "2025-05-05", activated: 87, total: 92 },
+        { date: "2025-05-06", activated: 93, total: 98 },
+        { date: "2025-05-07", activated: 97, total: 102 },
+        { date: "2025-05-08", activated: 104, total: 109 },
+        { date: "2025-05-09", activated: 108, total: 113 },
+      ],
+      weekly: [{ date: "Week 1 May", activated: 642, total: 673 }],
+      monthly: [{ date: "May 2025", activated: 678, total: 712 }],
+    },
+    Mumbai: {
+      daily: [
+        { date: "2025-05-05", activated: 103, total: 109 },
+        { date: "2025-05-06", activated: 112, total: 118 },
+        { date: "2025-05-07", activated: 118, total: 124 },
+        { date: "2025-05-08", activated: 125, total: 131 },
+        { date: "2025-05-09", activated: 131, total: 137 },
+      ],
+      weekly: [{ date: "Week 1 May", activated: 768, total: 803 }],
+      monthly: [{ date: "May 2025", activated: 809, total: 845 }],
+    },
+  },
+  // University-specific data
+  universities: {
+    "Bangalore University": {
+      daily: [
+        { date: "2025-05-05", activated: 54, total: 57 },
+        { date: "2025-05-06", activated: 58, total: 61 },
+        { date: "2025-05-07", activated: 62, total: 65 },
+        { date: "2025-05-08", activated: 65, total: 68 },
+        { date: "2025-05-09", activated: 67, total: 70 },
+      ],
+      weekly: [{ date: "Week 1 May", activated: 402, total: 421 }],
+      monthly: [{ date: "May 2025", activated: 423, total: 442 }],
+    },
+    "Mumbai University": {
+      daily: [
+        { date: "2025-05-05", activated: 67, total: 71 },
+        { date: "2025-05-06", activated: 73, total: 77 },
+        { date: "2025-05-07", activated: 76, total: 80 },
+        { date: "2025-05-08", activated: 82, total: 86 },
+        { date: "2025-05-09", activated: 85, total: 89 },
+      ],
+      weekly: [{ date: "Week 1 May", activated: 498, total: 521 }],
+      monthly: [{ date: "May 2025", activated: 523, total: 548 }],
+    },
+  },
+};

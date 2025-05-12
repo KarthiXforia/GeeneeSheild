@@ -1,31 +1,48 @@
 import {
-  AverageTicketsCreated,
-  Conversions,
-  CustomerSatisfication,
-  Metrics,
-  TicketByChannels,
+  DeviceManagement,
+  SecurityCompliance,
+  UsageAnalytics,
+  WebAccessFiltering,
 } from "@/components/chart-blocks";
 import Container from "@/components/container";
 
 export default function Home() {
   return (
     <div>
-      <Metrics />
-      <div className="grid grid-cols-1 divide-y border-b border-border laptop:grid-cols-3 laptop:divide-x laptop:divide-y-0 laptop:divide-border">
-        <Container className="py-4 laptop:col-span-2">
-          <AverageTicketsCreated />
+      {/* 📱 Device Management Section */}
+      <div className="border-b border-border">
+        <Container>
+          <h2 className="py-4 text-xl font-semibold">📱 Device Management</h2>
         </Container>
-        <Container className="py-4 laptop:col-span-1">
-          <Conversions />
-        </Container>
+        <DeviceManagement />
       </div>
-      <div className="grid grid-cols-1 divide-y border-b border-border laptop:grid-cols-2 laptop:divide-x laptop:divide-y-0 laptop:divide-border">
-        <Container className="py-4 laptop:col-span-1">
-          <TicketByChannels />
+
+      {/* 🔒 Security & Compliance Section */}
+      <div className="border-b border-border">
+        <Container>
+          <h2 className="py-4 text-xl font-semibold">
+            🔒 Security & Compliance
+          </h2>
         </Container>
-        <Container className="py-4 laptop:col-span-1">
-          <CustomerSatisfication />
+        <SecurityCompliance />
+      </div>
+
+      {/* 🌐 Web Access & Filtering Section */}
+      <div className="border-b border-border">
+        <Container>
+          <h2 className="py-4 text-xl font-semibold">
+            🌐 Web Access & Filtering
+          </h2>
         </Container>
+        <WebAccessFiltering />
+      </div>
+
+      {/* 📊 Usage Analytics Section */}
+      <div className="border-b border-border">
+        <Container>
+          <h2 className="py-4 text-xl font-semibold">📊 Usage Analytics</h2>
+        </Container>
+        <UsageAnalytics />
       </div>
     </div>
   );

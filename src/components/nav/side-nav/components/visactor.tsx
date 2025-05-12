@@ -12,7 +12,7 @@ export default function VisActor() {
       <span className="text-xs text-muted-foreground">Powered by</span>
       <div className="flex items-center space-x-2">
         <VisActorLogo size={24} />
-        <span className="text-md text-accent-foreground">VisActor</span>
+        <span className="text-md text-accent-foreground">GeeneeShield</span>
       </div>
     </Link>
   );

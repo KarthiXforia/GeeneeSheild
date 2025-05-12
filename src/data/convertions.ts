@@ -1,3 +1,4 @@
+// Maintain compatibility with existing components
 export const convertions = [
   {
     name: "Bandung",
@@ -16,3 +17,245 @@ export const convertions = [
     value: 320,
   },
 ];
+
+// Blocked domains access attempts data
+export const blockedDomainsAttempts = [
+  {
+    name: "youtube.com",
+    value: 12854,
+  },
+  {
+    name: "instagram.com",
+    value: 8764,
+  },
+  {
+    name: "tiktok.com",
+    value: 6453,
+  },
+  {
+    name: "facebook.com",
+    value: 5238,
+  },
+  {
+    name: "twitter.com",
+    value: 3921,
+  },
+  {
+    name: "reddit.com",
+    value: 2876,
+  },
+  {
+    name: "netflix.com",
+    value: 2354,
+  },
+  {
+    name: "primevideo.com",
+    value: 1987,
+  },
+  {
+    name: "hotstar.com",
+    value: 1654,
+  },
+  {
+    name: "twitch.tv",
+    value: 1432,
+  },
+];
+
+// Peak time data for blocked domain attempts (heatmap data)
+export const peakTimeAttempts = {
+  hourly: [
+    { hour: "12 AM", attempts: 542 },
+    { hour: "1 AM", attempts: 321 },
+    { hour: "2 AM", attempts: 198 },
+    { hour: "3 AM", attempts: 132 },
+    { hour: "4 AM", attempts: 87 },
+    { hour: "5 AM", attempts: 121 },
+    { hour: "6 AM", attempts: 345 },
+    { hour: "7 AM", attempts: 789 },
+    { hour: "8 AM", attempts: 1256 },
+    { hour: "9 AM", attempts: 1987 },
+    { hour: "10 AM", attempts: 2341 },
+    { hour: "11 AM", attempts: 2879 },
+    { hour: "12 PM", attempts: 3524 },
+    { hour: "1 PM", attempts: 2987 },
+    { hour: "2 PM", attempts: 3421 },
+    { hour: "3 PM", attempts: 3876 },
+    { hour: "4 PM", attempts: 4231 },
+    { hour: "5 PM", attempts: 3942 },
+    { hour: "6 PM", attempts: 3321 },
+    { hour: "7 PM", attempts: 2876 },
+    { hour: "8 PM", attempts: 2345 },
+    { hour: "9 PM", attempts: 1987 },
+    { hour: "10 PM", attempts: 1532 },
+    { hour: "11 PM", attempts: 987 },
+  ],
+  daily: [
+    { day: "Monday", attempts: 7893 },
+    { day: "Tuesday", attempts: 8245 },
+    { day: "Wednesday", attempts: 9354 },
+    { day: "Thursday", attempts: 8932 },
+    { day: "Friday", attempts: 12453 },
+    { day: "Saturday", attempts: 14876 },
+    { day: "Sunday", attempts: 11243 },
+  ],
+  heatmap: [
+    // Format: [day, hour, intensity]
+    // 0=Sunday, 1=Monday, ..., 6=Saturday
+    // Hour: 0-23 for 24 hour format
+    // Intensity: Number of attempts
+    [0, 0, 254],
+    [0, 1, 165],
+    [0, 2, 87],
+    [0, 3, 43],
+    [0, 4, 32],
+    [0, 5, 54],
+    [0, 6, 132],
+    [0, 7, 287],
+    [0, 8, 456],
+    [0, 9, 732],
+    [0, 10, 943],
+    [0, 11, 1176],
+    [0, 12, 1354],
+    [0, 13, 1243],
+    [0, 14, 1432],
+    [0, 15, 1521],
+    [0, 16, 1465],
+    [0, 17, 1298],
+    [0, 18, 1087],
+    [0, 19, 976],
+    [0, 20, 754],
+    [0, 21, 654],
+    [0, 22, 432],
+    [0, 23, 321],
+
+    [1, 0, 154],
+    [1, 1, 87],
+    [1, 2, 43],
+    [1, 3, 21],
+    [1, 4, 12],
+    [1, 5, 32],
+    [1, 6, 112],
+    [1, 7, 354],
+    [1, 8, 576],
+    [1, 9, 897],
+    [1, 10, 1043],
+    [1, 11, 1265],
+    [1, 12, 1476],
+    [1, 13, 1265],
+    [1, 14, 1354],
+    [1, 15, 1287],
+    [1, 16, 1176],
+    [1, 17, 1054],
+    [1, 18, 897],
+    [1, 19, 765],
+    [1, 20, 587],
+    [1, 21, 432],
+    [1, 22, 321],
+    [1, 23, 189],
+
+    [2, 0, 176],
+    [2, 1, 98],
+    [2, 2, 56],
+    [2, 3, 32],
+    [2, 4, 21],
+    [2, 5, 43],
+    [2, 6, 143],
+    [2, 7, 398],
+    [2, 8, 643],
+    [2, 9, 932],
+    [2, 10, 1132],
+    [2, 11, 1354],
+    [2, 12, 1576],
+    [2, 13, 1387],
+    [2, 14, 1486],
+    [2, 15, 1432],
+    [2, 16, 1321],
+    [2, 17, 1198],
+    [2, 18, 976],
+    [2, 19, 843],
+    [2, 20, 654],
+    [2, 21, 521],
+    [2, 22, 387],
+    [2, 23, 243],
+
+    // Add the remaining days in the same format
+  ],
+};
+
+// Create a data structure for showing weekly and monthly access patterns
+export const blockedDomainTrends = {
+  weekly: [
+    {
+      domain: "youtube.com",
+      week1: 3257,
+      week2: 3421,
+      week3: 3012,
+      week4: 3164,
+    },
+    {
+      domain: "instagram.com",
+      week1: 2342,
+      week2: 2187,
+      week3: 2098,
+      week4: 2137,
+    },
+    {
+      domain: "tiktok.com",
+      week1: 1687,
+      week2: 1543,
+      week3: 1632,
+      week4: 1591,
+    },
+    {
+      domain: "facebook.com",
+      week1: 1354,
+      week2: 1287,
+      week3: 1321,
+      week4: 1276,
+    },
+    { domain: "twitter.com", week1: 987, week2: 1032, week3: 954, week4: 948 },
+  ],
+  monthly: [
+    {
+      domain: "youtube.com",
+      jan: 12754,
+      feb: 13421,
+      mar: 12876,
+      apr: 13254,
+      may: 3254,
+    },
+    {
+      domain: "instagram.com",
+      jan: 9124,
+      feb: 9365,
+      mar: 8943,
+      apr: 9245,
+      may: 2187,
+    },
+    {
+      domain: "tiktok.com",
+      jan: 6732,
+      feb: 6543,
+      mar: 6254,
+      apr: 6876,
+      may: 1623,
+    },
+    {
+      domain: "facebook.com",
+      jan: 5421,
+      feb: 5365,
+      mar: 5123,
+      apr: 5354,
+      may: 1234,
+    },
+    {
+      domain: "twitter.com",
+      jan: 3987,
+      feb: 4012,
+      mar: 3867,
+      apr: 3945,
+      may: 965,
+    },
+  ],
+};
