@@ -4,7 +4,7 @@ import { VisActorLogo } from "@/components/icons";
 export default function VisActor() {
   return (
     <Link
-      href="https://visactor.io"
+      href="https://geeneesheild.io"
       target="_blank"
       className="relative my-2 flex flex-col items-center justify-center gap-y-2 px-4 py-4"
     >
