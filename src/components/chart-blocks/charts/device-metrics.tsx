@@ -10,13 +10,16 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import Container from "@/components/container";
-import { filteredMetricsData, metrics } from "@/data/metrics";
+import { metrics } from "@/data/metrics";
 import { cn } from "@/lib/utils";
 
 type RegionType = "all" | "state" | "district" | "university";
 type Region = string;
 
-const iconMap: Record<string, React.ComponentType<any>> = {
+const iconMap: Record<
+  string,
+  React.ComponentType<React.SVGProps<SVGSVGElement>>
+> = {
   "Total Enrolled Devices": Tablet,
   "Devices in Kiosk Mode": Tablet,
   "Activation Success Rate": CheckCheck,
@@ -24,8 +27,8 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 };
 
 export default function EnrolledDevicesMetrics() {
-  const [regionType, setRegionType] = useState<RegionType>("all");
-  const [selectedRegion, setSelectedRegion] = useState<Region>("");
+  const [_regionType, _setRegionType] = useState<RegionType>("all");
+  const [_selectedRegion, _setSelectedRegion] = useState<Region>("");
 
   // Use the metrics data as is for now
   // In a real implementation, you would filter this based on regionType and selectedRegion

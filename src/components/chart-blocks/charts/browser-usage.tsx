@@ -1,6 +1,7 @@
 "use client";
 
-import { Chrome, Globe, LucideIcon, Smartphone } from "lucide-react";
+import { Chrome, Globe, Smartphone } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // Sample data for browser usage
 const browserUsageData = {

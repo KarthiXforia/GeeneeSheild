@@ -18,7 +18,7 @@ import {
 import { activationTrendData } from "@/data/average-tickets-created";
 
 // Define proper types for the data
-interface ActivationDataItem {
+interface _ActivationDataItem {
   date: string;
   activated: number;
   total: number;
@@ -120,36 +120,23 @@ export default function DeviceActivationTrend() {
       padding: [20, 20, 30, 40],
       legends: {
         visible: true,
-        position: "top",
-        align: "start",
+        position: "start",
+        align: "left",
       },
       stack: false,
-      dodging: true,
-      dodgePadding: 8,
       tooltip: {
+        visible: true,
         trigger: ["click", "hover"],
-        formatter: (datum: any) => {
-          const value = datum.count.toLocaleString();
-
-          if (datum.type === "Latest Activations") {
-            return {
-              name: format(new Date(datum.date), "MMM dd, yyyy"),
-              value: `${value} activations`,
-            };
-          } else {
-            return {
-              name: format(new Date(datum.date), "MMM dd, yyyy"),
-              value: `${value} devices`,
-            };
-          }
-        },
+        enterable: true,
       },
       axes: [
         {
           orient: "bottom",
           label: {
             formatMethod: (value) => {
-              return format(new Date(value), "MM/dd");
+              // Ensure value is a string before creating a Date
+              const dateValue = Array.isArray(value) ? value[0] : value;
+              return format(new Date(dateValue as string), "MM/dd");
             },
           },
         },
@@ -157,10 +144,6 @@ export default function DeviceActivationTrend() {
           orient: "left",
         },
       ],
-      crosshair: {
-        visible: true,
-        style: { stroke: "#d1d5db", lineWidth: 1 },
-      },
       bar: {
         state: {
           hover: {

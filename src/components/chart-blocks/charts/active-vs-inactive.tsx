@@ -28,8 +28,8 @@ const Bar = ({
 
 export default function ActiveVsInactiveDevices() {
   // State for region filters would typically come from a context or prop
-  const [regionType] = useState("all");
-  const [selectedRegion] = useState("");
+  const [_regionType] = useState("all");
+  const [_selectedRegion] = useState("");
 
   // Use all data for now
   const data = filteredMetricsData.all;

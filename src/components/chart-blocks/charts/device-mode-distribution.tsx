@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  Circle,
-  Laptop,
-  LucideIcon,
-  MonitorSmartphone,
-  Tablet,
-} from "lucide-react";
+import { Circle, Laptop, MonitorSmartphone, Tablet } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // Sample data for device mode distribution
 const deviceModeData = {

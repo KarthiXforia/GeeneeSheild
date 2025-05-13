@@ -8,7 +8,7 @@ import {
 } from "@/data/customer-satisfication";
 
 export default function AccessibilityPermissions() {
-  const [showDetails, setShowDetails] = useState(false);
+  const [_showDetails, _setShowDetails] = useState(false);
 
   // Data from our MDM data structures
   const { enabled, pending } = accessibilityPermissionsData;

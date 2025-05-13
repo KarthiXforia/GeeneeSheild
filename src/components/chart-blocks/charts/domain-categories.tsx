@@ -6,10 +6,10 @@ import {
   FileVideo,
   Globe,
   Heart,
-  LucideIcon,
   Music,
   ShoppingCart,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // Sample data for domain categories
 const domainCategoriesData = {
