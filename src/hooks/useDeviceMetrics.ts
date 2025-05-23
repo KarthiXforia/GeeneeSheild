@@ -43,8 +43,16 @@ export function useDeviceMetrics() {
     gcTime: 1000 * 60 * 10, // 10 minutes
     // Use the cached data if it's fresh, otherwise fetch new data
     initialData: isFresh ? store.metrics : undefined,
+    // Control refetching on window focus
+    refetchOnWindowFocus: !isFresh,
     // Don't refetch if we have fresh data
     refetchOnMount: !isFresh,
+    // Add retry logic for transient failures
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    // Add background polling (conservative interval)
+    refetchInterval: 1000 * 60 * 15, // 15 minutes
+    refetchIntervalInBackground: true,
   });
 
   // Clean up on unmount
