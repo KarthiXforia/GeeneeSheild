@@ -1,52 +1,90 @@
 "use client";
 
 import {
-  Accessibility,
-  Activity,
+  Accessibility, // Activity,
   ArrowDownRight,
   ArrowUpRight,
   CheckCheck,
+  Loader2,
   Tablet,
 } from "lucide-react";
-import { useState } from "react";
 import Container from "@/components/container";
-import { metrics } from "@/data/metrics";
+import { useDeviceMetrics } from "@/hooks/useDeviceMetrics";
 import { cn } from "@/lib/utils";
 
-type RegionType = "all" | "state" | "district" | "university";
-type Region = string;
+type Metric = {
+  title: string;
+  value: string;
+  change: number;
+  icon: React.ReactNode;
+};
 
-const iconMap: Record<
-  string,
-  React.ComponentType<React.SVGProps<SVGSVGElement>>
-> = {
-  "Total Enrolled Devices": Tablet,
-  "Devices in Kiosk Mode": Tablet,
-  "Activation Success Rate": CheckCheck,
-  "Accessibility Enabled": Accessibility,
+const iconMap: Record<string, React.ReactNode> = {
+  "Total Enrolled Devices": <Tablet className="h-5 w-5" />,
+  "Devices in Kiosk Mode": <Tablet className="h-5 w-5" />,
+  "Accessibility Enabled": <Accessibility className="h-5 w-5" />,
+  "Activation Success Rate": <CheckCheck className="h-5 w-5" />,
 };
 
 export default function EnrolledDevicesMetrics() {
-  const [_regionType, _setRegionType] = useState<RegionType>("all");
-  const [_selectedRegion, _setSelectedRegion] = useState<Region>("");
+  const { data, error, isLoading } = useDeviceMetrics();
 
-  // Use the metrics data as is for now
-  // In a real implementation, you would filter this based on regionType and selectedRegion
+  if (isLoading) {
+    return (
+      <Container className="flex h-40 items-center justify-center border-b border-border">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="flex h-40 items-center justify-center border-b border-border">
+        <p className="text-destructive">
+          Failed to load device metrics. Please try again later.
+        </p>
+      </Container>
+    );
+  }
+
+  const metrics: Metric[] = [
+    {
+      title: "Total Enrolled Devices",
+      value: data?.totalDevices.toLocaleString() || "0",
+      change: 0.12, // You might want to calculate this from your API
+      icon: iconMap["Total Enrolled Devices"],
+    },
+    {
+      title: "Devices in Kiosk Mode",
+      value: data?.kioskModeDevices.toLocaleString() || "0",
+      change: 0.08, // You might want to calculate this from your API
+      icon: iconMap["Devices in Kiosk Mode"],
+    },
+    {
+      title: "Accessibility Enabled",
+      value: data?.accessibilityEnabled.toLocaleString() || "0",
+      change: 0.15, // You might want to calculate this from your API
+      icon: iconMap["Accessibility Enabled"],
+    },
+    {
+      title: "Activation Success Rate",
+      value: `${data?.activationSuccessRate || 0}%`,
+      change: 0.05, // You might want to calculate this from your API
+      icon: iconMap["Activation Success Rate"],
+    },
+  ];
 
   return (
     <Container className="grid grid-cols-1 gap-y-6 border-b border-border py-4 phone:grid-cols-2 laptop:grid-cols-4">
-      {metrics.map((metric) => {
-        const Icon = iconMap[metric.title] || Activity;
-        return (
-          <MetricCard
-            key={metric.title}
-            title={metric.title}
-            value={metric.value}
-            change={metric.change}
-            icon={<Icon className="h-5 w-5" />}
-          />
-        );
-      })}
+      {metrics.map((metric) => (
+        <MetricCard
+          key={metric.title}
+          title={metric.title}
+          value={metric.value}
+          change={metric.change}
+          icon={metric.icon}
+        />
+      ))}
     </Container>
   );
 }

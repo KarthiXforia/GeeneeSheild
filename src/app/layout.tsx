@@ -3,6 +3,7 @@ import { Gabarito } from "next/font/google";
 import { SideNav } from "@/components/nav";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { QueryClientProviderWrapper } from "@/providers/QueryClientProvider";
 import "@/style/globals.css";
 import { Providers } from "./providers";
 
@@ -24,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("bg-background font-sans", gabarito.variable)}>
-        <Providers>
-          <div className="flex min-h-[100dvh]">
-            <SideNav />
-            <div className="flex-grow overflow-auto">{children}</div>
-          </div>
-        </Providers>
+        <QueryClientProviderWrapper>
+          <Providers>
+            <div className="flex min-h-[100dvh]">
+              <SideNav />
+              <div className="flex-grow overflow-auto">{children}</div>
+            </div>
+          </Providers>
+        </QueryClientProviderWrapper>
       </body>
     </html>
   );
