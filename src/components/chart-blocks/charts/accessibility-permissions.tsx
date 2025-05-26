@@ -1,38 +1,45 @@
 "use client";
 
 import { Accessibility, ShieldAlert } from "lucide-react";
-import { useState } from "react";
-import {
-  accessibilityPermissionsData,
-  kioskWithAccessibilityData,
-} from "@/data/customer-satisfication";
+import { useDeviceStore } from "@/store/deviceStore";
 
 export default function AccessibilityPermissions() {
-  const [_showDetails, _setShowDetails] = useState(false);
-
-  // Data from our MDM data structures
-  const { enabled, pending } = accessibilityPermissionsData;
+  // Get metrics from Zustand store
+  const { metrics } = useDeviceStore();
   const {
-    count: kioskWithAccessibility,
-    percentage: kioskWithAccessibilityPercentage,
-  } = kioskWithAccessibilityData;
+    totalDevices = 0,
+    accessibilityEnabled = 0,
+    accessibilityWithKiosk = 0,
+    kioskModeDevices = 0,
+  } = metrics || {};
 
-  // Calculate total and percentages
-  const total = enabled + pending;
-  const enabledPercentage = Math.round((enabled / total) * 100);
-  const pendingPercentage = Math.round((pending / total) * 100);
+  // Calculate pending devices (total devices - enabled devices)
+  const pending = Math.max(0, totalDevices - accessibilityEnabled);
+
+  // Calculate percentages
+  const enabledPercentage =
+    totalDevices > 0
+      ? Math.round((accessibilityEnabled / totalDevices) * 100)
+      : 0;
+  const pendingPercentage = 100 - enabledPercentage;
+
+  // Calculate kiosk with accessibility percentage
+  const kioskWithAccessibilityPercentage =
+    kioskModeDevices > 0
+      ? Math.round((accessibilityWithKiosk / kioskModeDevices) * 100)
+      : 0;
 
   return (
     <div className="p-4">
       <div className="mb-4">
         <h4 className="text-lg font-semibold">Accessibility Permissions</h4>
         <p className="text-sm text-muted-foreground">
-          Status of accessibility permissions across {total.toLocaleString()}{" "}
-          devices
+          Status of accessibility permissions across{" "}
+          {totalDevices.toLocaleString()} devices
         </p>
       </div>
 
-      {/* Donut chart placeholder - replace with VisActor chart */}
+      {/* Donut chart */}
       <div className="my-4 flex justify-center">
         <div className="relative h-48 w-48">
           <div className="absolute inset-0 flex items-center justify-center">
@@ -72,7 +79,9 @@ export default function AccessibilityPermissions() {
             <Accessibility className="h-5 w-5 text-green-500" />
             <h5 className="font-medium">Enabled</h5>
           </div>
-          <p className="text-2xl font-bold">{enabled.toLocaleString()}</p>
+          <p className="text-2xl font-bold">
+            {accessibilityEnabled.toLocaleString()}
+          </p>
           <p className="text-sm text-muted-foreground">
             {enabledPercentage}% of all devices
           </p>
@@ -96,7 +105,7 @@ export default function AccessibilityPermissions() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-2xl font-bold">
-              {kioskWithAccessibility.toLocaleString()}
+              {accessibilityWithKiosk.toLocaleString()}
             </p>
             <p className="text-sm text-muted-foreground">Devices</p>
           </div>
