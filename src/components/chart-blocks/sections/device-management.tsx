@@ -1,8 +1,8 @@
 import Container from "@/components/container";
 import { EnrolledDevicesMetrics } from "..";
 import ActiveVsInactiveDevices from "../charts/active-vs-inactive";
-import BatteryConsumption from "../charts/battery-consumption";
 import DeviceActivationTrend from "../charts/device-activation-trend";
+import DeviceStatus from "../charts/device-status";
 import { RegionFilter } from "../components/region-filter";
 
 export default function DeviceManagement() {
@@ -22,10 +22,10 @@ export default function DeviceManagement() {
         </Container>
         <Container className="py-4 laptop:col-span-1">
           <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
-            <h3 className="text-lg font-semibold">Battery Consumption</h3>
+            <h3 className="text-lg font-semibold">Device Status</h3>
             <RegionFilter />
           </div>
-          <BatteryConsumption />
+          <DeviceStatus />
         </Container>
       </div>
 

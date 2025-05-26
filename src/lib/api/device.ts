@@ -1,6 +1,11 @@
 // src/lib/api/device.ts
 import type { AxiosRequestConfig } from "axios";
-import type { DeviceMetricsResponse } from "@/types/device";
+import type {
+  ActivationTimelineParams,
+  ActivationTimelineResponse,
+  DeviceMetricsResponse,
+  DeviceStatusResponse,
+} from "@/types/device";
 import type { ApiError } from "./client";
 import apiClient from "./client";
 
@@ -33,4 +38,30 @@ export function fetchDeviceMetricsForSuspense() {
       return promise;
     },
   };
+}
+
+// Fetch device activation timeline data
+export async function fetchActivationTimeline(
+  params: ActivationTimelineParams,
+  config?: AxiosRequestConfig,
+): Promise<ActivationTimelineResponse> {
+  try {
+    return await apiClient.get("/activations/timeline", {
+      ...config,
+      params,
+    });
+  } catch (error) {
+    throw error as ApiError;
+  }
+}
+
+// Fetch device status data
+export async function fetchDeviceStatus(
+  config?: AxiosRequestConfig,
+): Promise<DeviceStatusResponse> {
+  try {
+    return await apiClient.get("/devices/status", config);
+  } catch (error) {
+    throw error as ApiError;
+  }
 }

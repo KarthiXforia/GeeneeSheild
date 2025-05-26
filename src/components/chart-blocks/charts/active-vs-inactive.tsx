@@ -1,11 +1,9 @@
 "use client";
 
 import { Activity, Tablet } from "lucide-react";
-import { useState } from "react";
-import { filteredMetricsData } from "@/data/metrics";
+import { useDeviceStore } from "@/store/deviceStore";
 
-// Create a simple placeholder for the bar chart
-// In a real implementation, you would use VisActor library for the actual chart
+// Bar component remains the same
 const Bar = ({
   value,
   total,
@@ -27,20 +25,24 @@ const Bar = ({
 };
 
 export default function ActiveVsInactiveDevices() {
-  // State for region filters would typically come from a context or prop
-  const [_regionType] = useState("all");
-  const [_selectedRegion] = useState("");
+  // Get metrics from Zustand store
+  const { metrics } = useDeviceStore();
+  const {
+    totalDevices = 0,
+    kioskModeDevices = 0,
+    accessibilityEnabled = 0,
+    accessibilityWithKiosk = 0,
+  } = metrics || {};
 
-  // Use all data for now
-  const data = filteredMetricsData.all;
-
-  // Calculate totals
-  const totalDevices = data.totalEnrolled;
-  const activeDevices = data.activeDevices;
-  const inactiveDevices = totalDevices - activeDevices;
+  // Calculate active/inactive devices
+  // Note: Since we don't have direct active devices count, we'll need to make an assumption
+  // or adjust this based on your actual data structure
+  const activeDevices = accessibilityEnabled; // Adjust this based on your actual data
+  const inactiveDevices = Math.max(0, totalDevices - activeDevices);
 
   // Calculate percentages
-  const activePercentage = Math.round((activeDevices / totalDevices) * 100);
+  const activePercentage =
+    totalDevices > 0 ? Math.round((activeDevices / totalDevices) * 100) : 0;
   const inactivePercentage = 100 - activePercentage;
 
   return (
@@ -69,7 +71,7 @@ export default function ActiveVsInactiveDevices() {
           </div>
           <Bar
             value={activeDevices}
-            total={totalDevices}
+            total={totalDevices || 1} // Prevent division by zero
             color="bg-green-500"
           />
         </div>
@@ -87,7 +89,7 @@ export default function ActiveVsInactiveDevices() {
           </div>
           <Bar
             value={inactiveDevices}
-            total={totalDevices}
+            total={totalDevices || 1} // Prevent division by zero
             color="bg-gray-500"
           />
         </div>
@@ -98,20 +100,25 @@ export default function ActiveVsInactiveDevices() {
             <div className="rounded bg-gray-50 p-3 dark:bg-gray-800">
               <h5 className="mb-1 text-sm font-medium">Kiosk Mode</h5>
               <p className="text-xl font-bold">
-                {data.inKioskMode.toLocaleString()}
+                {kioskModeDevices.toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">
-                {Math.round((data.inKioskMode / totalDevices) * 100)}% of total
+                {totalDevices > 0
+                  ? Math.round((kioskModeDevices / totalDevices) * 100)
+                  : 0}
+                % of total
               </p>
             </div>
             <div className="rounded bg-gray-50 p-3 dark:bg-gray-800">
               <h5 className="mb-1 text-sm font-medium">Accessibility</h5>
               <p className="text-xl font-bold">
-                {data.accessibilityEnabled.toLocaleString()}
+                {accessibilityWithKiosk.toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">
-                {Math.round((data.accessibilityEnabled / totalDevices) * 100)}%
-                of total
+                {totalDevices > 0
+                  ? Math.round((accessibilityWithKiosk / totalDevices) * 100)
+                  : 0}
+                % with Kiosk
               </p>
             </div>
           </div>
