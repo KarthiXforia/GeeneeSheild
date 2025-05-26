@@ -28,3 +28,36 @@ export interface DeviceError {
   message: string;
   timestamp: string;
 }
+
+// Device Activation Timeline types
+export interface ActivationTimelineItem {
+  date: string;
+  activated: number;
+  total: number;
+}
+
+export interface ActivationTimelineResponse {
+  timeline: ActivationTimelineItem[];
+  totalActivations: number;
+  totalDevices: number;
+}
+
+export type TimeframeOption = "daily" | "weekly" | "monthly";
+
+export interface ActivationTimelineParams {
+  period: TimeframeOption;
+  startDate?: string;
+  endDate?: string;
+}
+
+// Device Status types
+export interface DeviceStatusItem {
+  name: string; // "Active", "Pending", "Failed"
+  count: number;
+  percentage: number;
+}
+
+export interface DeviceStatusResponse {
+  statuses: DeviceStatusItem[];
+  total: number;
+}
