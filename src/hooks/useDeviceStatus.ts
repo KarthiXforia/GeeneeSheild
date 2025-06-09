@@ -21,7 +21,8 @@ export function useDeviceStatus() {
   const cancelTokenRef = useRef<AbortController | null>(null);
 
   // Determine if we have fresh cached data
-  const isFresh = store.isDataFresh();
+  const isFresh =
+    store.lastUpdated && Date.now() - store.lastUpdated < 60 * 60 * 1000;
 
   const query = useQuery({
     queryKey: DEVICE_STATUS_QUERY_KEY,
