@@ -1,31 +1,61 @@
 "use client";
 
-import { Shield, ShieldAlert } from "lucide-react";
+import { Loader2, Shield, ShieldAlert } from "lucide-react";
 import { useState } from "react";
-
-// Sample data for blocked domains
-const blockedDomainsData = {
-  total: 12487,
-  top: [
-    { domain: "youtube.com", count: 2134, percentage: 17.1 },
-    { domain: "facebook.com", count: 1876, percentage: 15.0 },
-    { domain: "instagram.com", count: 1523, percentage: 12.2 },
-    { domain: "tiktok.com", count: 1245, percentage: 10.0 },
-    { domain: "twitter.com", count: 987, percentage: 7.9 },
-    { domain: "reddit.com", count: 876, percentage: 7.0 },
-    { domain: "snapchat.com", count: 679, percentage: 5.4 },
-    { domain: "other", count: 3167, percentage: 25.4 },
-  ],
-  change: +8.4, // Percentage change from previous period
-};
+import { useTopBlockedDomains } from "@/hooks/useTopBlockedDomains";
 
 export default function BlockedDomains() {
   const [showAllDomains, setShowAllDomains] = useState(false);
+  const { data, isLoading, error, refetch } = useTopBlockedDomains(10);
 
-  // Limit display to top 5 domains initially
   const domainsToShow = showAllDomains
-    ? blockedDomainsData.top
-    : blockedDomainsData.top.slice(0, 5);
+    ? data?.topBlockedDomains || []
+    : data?.topBlockedDomains?.slice(0, 5) || [];
+
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        <span className="ml-2">Loading blocked domains...</span>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center rounded-lg bg-red-50 p-4 text-center dark:bg-red-900/20">
+        <ShieldAlert className="mb-2 h-8 w-8 text-red-500" />
+        <h4 className="font-medium text-red-700 dark:text-red-300">
+          Error Loading Data
+        </h4>
+        <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <button
+          onClick={() => refetch()}
+          className="mt-3 rounded-md bg-red-100 px-3 py-1 text-sm font-medium text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  // No data state
+  if (!data?.topBlockedDomains?.length) {
+    return (
+      <div className="flex h-64 flex-col items-center justify-center rounded-lg bg-gray-50 p-4 text-center dark:bg-gray-800/50">
+        <Shield className="mb-2 h-8 w-8 text-gray-400" />
+        <h4 className="font-medium text-gray-700 dark:text-gray-300">
+          No Blocked Domains
+        </h4>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          No blocked domains found in the selected time period.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">
@@ -34,27 +64,28 @@ export default function BlockedDomains() {
           <div>
             <h4 className="text-lg font-semibold">Blocked Domains</h4>
             <p className="text-sm text-muted-foreground">
-              Top blocked domains by access attempts
+              Top 10 blocked domains by access attempts
             </p>
           </div>
           <div className="flex items-center gap-1 rounded bg-red-50 px-3 py-1 dark:bg-red-900/20">
             <ShieldAlert className="h-4 w-4 text-red-500" />
             <span className="font-medium text-red-600 dark:text-red-400">
-              {blockedDomainsData.total.toLocaleString()}
+              {data.totalAttempts.toLocaleString()}
             </span>
           </div>
         </div>
-        <div className="mt-1 flex items-center">
+        {/* <div className="mt-1 flex items-center">
           <span className="text-sm text-muted-foreground">
             Total blocked attempts
           </span>
           <div
-            className={`ml-2 text-xs font-medium ${blockedDomainsData.change > 0 ? "text-red-500" : "text-green-500"}`}
+            className={`ml-2 text-xs font-medium ${
+              data.change > 0 ? "text-red-500" : "text-green-500"
+            }`}
           >
-            {blockedDomainsData.change > 0 ? "↑" : "↓"}{" "}
-            {Math.abs(blockedDomainsData.change)}%
+            {data.change > 0 ? "↑" : "↓"} {Math.abs(data.change)}%
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Blocked domains list */}
@@ -70,7 +101,8 @@ export default function BlockedDomains() {
                 <span className="font-medium">{domain.domain}</span>
               </div>
               <span className="text-sm">
-                {domain.count.toLocaleString()} ({domain.percentage}%)
+                {domain.count.toLocaleString()} ({domain.percentage.toFixed(1)}
+                %)
               </span>
             </div>
             <div className="h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700">
@@ -84,7 +116,7 @@ export default function BlockedDomains() {
       </div>
 
       {/* Show more/less toggle */}
-      {blockedDomainsData.top.length > 5 && (
+      {data.topBlockedDomains.length > 5 && (
         <button
           onClick={() => setShowAllDomains(!showAllDomains)}
           className="mt-4 w-full rounded-md border border-blue-200 py-2 text-sm text-blue-500 transition-colors hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-900/20"
