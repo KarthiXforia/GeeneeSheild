@@ -2,13 +2,30 @@
 // next.config.mjs
 const nextConfig = {
   async rewrites() {
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const apiProxyPath = process.env.NEXT_PUBLIC_API_PROXY_PATH || "/api/proxy";
+
     return [
       {
-        source: "/api/proxy/:path*",
-        destination:
-          "https://geenee-pro-dev-tf-146970343451.asia-south1.run.app/:path*",
+        source: `${apiProxyPath}/:path*`,
+        destination: `${apiBaseUrl}/:path*`,
       },
     ];
+  },
+  images: {
+    domains: [
+      "play-lh.googleusercontent.com",
+      "icon.url",
+      "lh3.googleusercontent.com",
+      "play.google.com",
+      "*.googleusercontent.com",
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
 
